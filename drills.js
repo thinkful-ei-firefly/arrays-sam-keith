@@ -112,6 +112,60 @@ function maxSum(arr){
   return max
 }
 
+function newSum(arr){
+  let max_so_far = 0;
+  let max_end_here = 0;
+  for(let i = 0; i < arr.length; i++){
+    max_end_here+= arr[i]
+    if (max_end_here < 0)
+      max_end_here = 0
+    if (max_end_here > max_so_far)
+      max_so_far = max_end_here
+  }
+  return max_so_far;
+}
+
+function arrayMerge(arr1, arr2){
+  let newArray = []
+  let sorted = false
+  while  (arr1.length != 0 || arr2.length != 0){
+    if (arr1.length === 0){
+      newArray.push(arr2[0])
+      arr1 = arr2.slice(1)
+    } else if (arr2.length === 0 ){
+      newArray.push(arr1[0])
+      arr1 = arr1.slice(1)
+    }
+    else if(arr1[0] <= arr2[0]){
+      newArray.push(arr1[0])
+      arr1 = arr1.slice(1)
+    } else {
+      newArray.push(arr2[0])
+      arr2 = arr2.slice(1)
+    }
+  }
+  return newArray
+}
+
+function removeChars(string, filter){
+  if (string.length === 0)
+    return ''
+  let char = string[0]
+  if (filter.includes(char))
+    return removeChars(string.slice(1), filter)
+  else 
+    return char + removeChars(string.slice(1), filter)
+}
+
+function products(arr){
+  let pro = arr.reduce((a,b) => a*b)
+  let newArr = []
+  for(let i = 0; i < arr.length; i++){
+    newArr.push(pro/arr[i])
+  }
+  return newArr
+}
+
 //Drill 2
 //What is the length, capacity and memory address of your array?
 //length = 1, capacity = 3, memory address = 0
@@ -138,4 +192,10 @@ function maxSum(arr){
 
 //console.log(filterArray([1, 6, 2, 7, 3, 9]))
 
-console.log(maxSumRecursive([-10, 4, 6, -3, 5, -2, 1]))
+//console.log(newSum([-10, 4, 6, -3, 5, -2, 1]))
+
+//console.log(arrayMerge([1, 3, 6, 8, 11], [2, 3, 5, 8, 9, 10]))
+
+//console.log(removeChars('Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'))
+
+console.log(products([1,3,9,4]))
