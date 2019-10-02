@@ -73,6 +73,15 @@ function URLify(string){
   return string[0] + URLify(string.slice(1))
 }
 
+function filterArray(arr) {
+  lastValue = arr[arr.length-1];
+  if(arr.length === 1) return [2];
+  if (lastValue < 5) return filterArray(arr.slice(0, -1));
+  console.log(lastValue)
+  console.log(arr.slice(0, -1))
+  return [...filterArray(arr.slice(0, -1)), lastValue];
+}
+
 //Drill 2
 //What is the length, capacity and memory address of your array?
 //length = 1, capacity = 3, memory address = 0
@@ -95,4 +104,6 @@ function URLify(string){
 
 //main()
 
-console.log(URLify('The quick brown fox jumps over the lazy dog.'))
+// console.log(URLify('The quick brown fox jumps over the lazy dog.'))
+
+console.log(filterArray([1, 6, 2, 7, 3, 9]))
