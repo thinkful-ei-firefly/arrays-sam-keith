@@ -79,6 +79,27 @@ function filterArray(arr) {
   return [arr[0], ...filterArray(arr.slice(1))];
 }
 
+function maxSum(arr){
+  let max = 0
+  for (let start = 0; start < arr.length; start++){
+    for (let end = start; end < arr.length; end++){
+      if (end === start && arr[start] > max)
+        max = arr[start]
+      else if (end === start+1 && (arr[start] + arr[end]) > max)
+        max = arr[start] + arr[end]
+      else {
+        let temp = 0
+        for (let i = start; i <= end; i++ ){
+          temp += arr[i]
+        }
+        if (temp > max)
+          max = temp
+      }
+    }
+  }
+  return max
+}
+
 //Drill 2
 //What is the length, capacity and memory address of your array?
 //length = 1, capacity = 3, memory address = 0
@@ -103,4 +124,6 @@ function filterArray(arr) {
 
 // console.log(URLify('The quick brown fox jumps over the lazy dog.'))
 
-console.log(filterArray([1, 6, 2, 7, 3, 9]))
+//console.log(filterArray([1, 6, 2, 7, 3, 9]))
+
+console.log(maxSum([-10, 4, 6, -3, 5, -2, 1]))
