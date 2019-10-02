@@ -55,10 +55,10 @@ function main() {
   arr.pop()
   arr.pop()
 
-  console.log(arr)
-  console.log(memory.get(arr.ptr))
+  // console.log(arr)
+  // console.log(memory.get(arr.ptr))
   arr.length = 0;
-  console.log(arr)
+  // console.log(arr)
   arr.push("tauhida")
   console.log(memory.get(arr.ptr))
 
@@ -77,6 +77,18 @@ function filterArray(arr) {
   if(arr.length === 0) return [];
   if (arr[0] < 5) return filterArray(arr.slice(1));
   return [arr[0], ...filterArray(arr.slice(1))];
+}
+
+function maxSumRecursive(arr, currentMax=0) {
+  if (arr.length === 0) {
+    return
+  }
+  let currentSum = arr.reduce((a, b) => a+b)
+  if (currentSum < currentMax) currentSum = currentMax
+  // console.log(currentSum)
+  maxSumRecursive(arr.slice(1), currentSum)
+  maxSumRecursive(arr.slice(0, -1), currentSum)
+  return
 }
 
 function maxSum(arr){
@@ -126,4 +138,4 @@ function maxSum(arr){
 
 //console.log(filterArray([1, 6, 2, 7, 3, 9]))
 
-console.log(maxSum([-10, 4, 6, -3, 5, -2, 1]))
+console.log(maxSumRecursive([-10, 4, 6, -3, 5, -2, 1]))
