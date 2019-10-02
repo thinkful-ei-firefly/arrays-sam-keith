@@ -74,12 +74,9 @@ function URLify(string){
 }
 
 function filterArray(arr) {
-  lastValue = arr[arr.length-1];
-  if(arr.length === 1) return [2];
-  if (lastValue < 5) return filterArray(arr.slice(0, -1));
-  console.log(lastValue)
-  console.log(arr.slice(0, -1))
-  return [...filterArray(arr.slice(0, -1)), lastValue];
+  if(arr.length === 0) return [];
+  if (arr[0] < 5) return filterArray(arr.slice(1));
+  return [arr[0], ...filterArray(arr.slice(1))];
 }
 
 //Drill 2
