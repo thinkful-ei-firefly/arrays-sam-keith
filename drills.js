@@ -26,6 +26,15 @@ class myArray {
     memory.free(oldPtr)
     this._capacity = newSize;
   }
+
+  pop(){
+    if (this.length === 0){
+      throw new Error('Index Error')
+    }
+    const value = memory.get(this.ptr + this.length-1)
+    this.length--;
+    return value
+  }
 }
 
 function main() {
@@ -42,10 +51,29 @@ function main() {
   arr.push(45);
   arr.push(10);
 
+  arr.pop()
+  arr.pop()
+  arr.pop()
+
   console.log(arr)
+  console.log(memory.get(arr.ptr))
+  arr.length = 0;
+  console.log(arr)
+  arr.push("tauhida")
+  console.log(memory.get(arr.ptr))
+
 
 }
 
+function URLify(string){
+  if(string.length === 0)
+    return ''
+  if (string[0] === ' ')
+    return '%20' + URLify(string.slice(1))
+  return string[0] + URLify(string.slice(1))
+}
+
+//Drill 2
 //What is the length, capacity and memory address of your array?
 //length = 1, capacity = 3, memory address = 0
 
@@ -55,4 +83,16 @@ function main() {
 // Once the array exceeded the capacity of 3, it had to resize the allocated space
 // and copied the array to ptr 3 and gave it a new capacity of 12.
 
-main()
+//Drill 3
+//Lenght = 3 capacity = 12, address = 3
+//Removes the last 3 values but the capacity and address are unchanged
+
+//Drill 4
+// The array gets emptied by setting the length to 0, and you add "tauhida"
+//to it but you get back not a number if you try to console log it
+//The purpose of the resize function is to allocate more space if the array runs out of space
+//We believe that Float64Array restricts the array to numbers
+
+//main()
+
+console.log(URLify('The quick brown fox jumps over the lazy dog.'))
