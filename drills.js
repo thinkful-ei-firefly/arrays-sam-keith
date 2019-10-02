@@ -166,6 +166,32 @@ function products(arr){
   return newArr
 }
 
+function zeroSetter(arr) {
+  let newArray = arr.map(x => [...x])
+  for (let i=0; i<arr.length; i++) {
+    for (let j=0; j<arr[i].length; j++) {
+      if (arr[i][j] === 0) {
+        for (let u=0; u<arr[i].length; u++) {
+          newArray[i][u] = 0
+        }
+        for (let p=0; p<arr.length; p++) {
+          newArray[p][j] = 0
+        }
+      }
+    }
+  }
+  return newArray
+}
+
+function stringRotateCheck(str1, str2) {
+  if (str1.length !== str2.length) return false;
+  for (let i=0; i<str1.length; i++) {
+    if (str1 === str2) return true;
+    str1 = str1.slice(1)+str1[0]
+  }
+  return false;
+}
+
 //Drill 2
 //What is the length, capacity and memory address of your array?
 //length = 1, capacity = 3, memory address = 0
@@ -198,4 +224,15 @@ function products(arr){
 
 //console.log(removeChars('Battle of the Vowels: Hawaii vs. Grozny', 'aeiou'))
 
-console.log(products([1,3,9,4]))
+// console.log(products([1,3,9,4]))
+
+// console.log(zeroSetter(
+//   [
+//   [1,0,1,1,0],
+//   [0,1,1,1,0],
+//   [1,1,1,1,1],
+//   [1,0,1,1,1],
+//   [1,1,1,1,1]]))
+
+// console.log(stringRotateCheck('amazon', 'azonam'))
+// console.log(stringRotateCheck('something', 'ethingsom'))
