@@ -147,6 +147,14 @@ function arrayMerge(arr1, arr2){
   return newArray
 }
 
+function merger(arr1, arr2, merged=[]) {
+  if (!arr1.length && !arr2.length) {
+    return merged
+  }
+  else if (!arr2.length || arr1[0] < arr2[0]) return merger(arr1.slice(1), arr2, [...merged, arr1[0]])
+  else if (!arr1.length || arr1[0] > arr2[0]) return merger(arr1, arr2.slice(1), [...merged, arr2[0]])
+}
+
 function removeChars(string, filter){
   if (string.length === 0)
     return ''
